@@ -1,7 +1,7 @@
 # Rime schema
 # encoding: utf-8
 patch:
-  schema/name: 自然码
+  schema/name: xzhou_double
   switches:
     - name: ascii_mode
       reset: 0
@@ -75,6 +75,47 @@ patch:
       ">": ["》", "〉", "»", ">"]
 
   recognizer/patterns/punct: "^/([0-9]0?|[A-Za-z]+)$"
+
+  ### 自定义双拼键位
+  speller:
+    alphabet: zyxwvutsrqponmlkjihgfedcba;
+    initials: zyxwvutsrqponmlkjihgfedcba
+    delimiter: " '"
+    algebra:
+    - derive/^([zcs])h/$1/
+    - erase/^xx$/
+    - derive/^([jqxy])u$/$1v/
+    - derive/^([aoe].*)$/o$1/
+    - xform/^([ae])(.*)$/$1$1$2/
+    - xform/iu$|uai$/Q/
+    - xform/[iu]a$/W/
+    - xform/er$|[uv]an$/R/
+    - xform/ui$/T/
+    - xform/[uv]e$/V/
+    - xform/^sh/U/
+    - xform/^ch/I/
+    - xform/^zh/V/
+    - xform/uo$/O/
+    - xform/[uv]n$/P/
+    - xform/i?ong$/S/
+    - xform/[iu]ang$/D/
+    - xform/(.)en$/$1F/
+    - xform/(.)eng$/$1G/
+    - xform/(.)ang$/$1H/
+    - xform/ian$/M/
+    - xform/(.)an$/$1J/
+    - xform/iao$/C/
+    - xform/(.)ao$/$1K/
+    - xform/(.)ai$/$1L/
+    - xform/(.)ei$/$1Z/
+    - xform/ie$/X/
+    #- derive/T$/V/
+    - xform/(.)ou$/$1Y/
+    - xform/v$/B
+    - xform/in$/N/
+    - xform/ing$/;/
+    - xlit/QWRTYUIOPSDFGHMJCKLZXVBN/qwrtyuiopsdfghmjcklzxvbn/
+    #- abbrev/^(.).+$/$1/
 
   ### 双拼使用自定义词典 custom_phrase.txt
   custom_phrase:
